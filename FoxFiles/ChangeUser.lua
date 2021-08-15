@@ -4,11 +4,11 @@ if ChatType == 'sp' or ChatType == 'gp'  then
 if text then 
 tdcli_function({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,result)
 if result.id_ then 
-local abbs = DevAbs:get("DevProxTEAM:User"..result.id_)
+local abbs = redis:get("DevProxTEAM:User"..result.id_)
 if not result.username_ then 
 if abbs then 
-Dev_Abs(msg.chat_id_, msg.id_, 1, "حذف معرفه خمطو بسرعه، 😹💔 \nهذا معرفه @"..abbs.."", 1, 'html')
-DevAbs:del("DevProxTEAM:User"..result.id_) 
+SendFoX(msg.chat_id_, msg.id_, 1, "حذف معرفه خمطو بسرعه، 😹💔 \nهذا معرفه @"..abbs.."", 1, 'html')
+redis:del("DevProxTEAM:User"..result.id_) 
 end
 end
 if result.username_ then 
@@ -20,9 +20,9 @@ local abs_text = {
 "معرفك القديم @"..result.username_.." ضمه بقناة لاينبعص، 😹♥️",
 }
 abbss = math.random(#abs_text)
-Dev_Abs(msg.chat_id_, msg.id_, 1, abs_text[abbss], 1, 'html')
+SendFoX(msg.chat_id_, msg.id_, 1, abs_text[abbss], 1, 'html')
 end  
-DevAbs:set("DevProxTEAM:User"..result.id_, result.username_) 
+redis:set("DevProxTEAM:User"..result.id_, result.username_) 
 end
 end
 end,nil) 

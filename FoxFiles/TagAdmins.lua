@@ -3,11 +3,11 @@ local text = msg.content_.text_
 if ChatType == 'sp' or ChatType == 'gp'  then
 if Manager(msg) then
 if text == "admin" or text == "@admin" then
-if DevAbs:get(DevProx.."Abs:TagAdmins:Time"..msg.chat_id_..':'..msg.sender_user_id_) then  
-Dev_Abs(msg.chat_id_, msg.id_, 1, '⌁︙انتظر دقيقه بعد ارسال الامر', 1, 'md')
+if redis:get(DevProx.."Abs:TagAdmins:Time"..msg.chat_id_..':'..msg.sender_user_id_) then  
+SendFoX(msg.chat_id_, msg.id_, 1, '⌁︙انتظر دقيقه بعد ارسال الامر', 1, 'md')
 return false  
 end
-DevAbs:setex(DevProx..'Abs:TagAdmins:Time'..msg.chat_id_..':'..msg.sender_user_id_,300,true)
+redis:setex(DevProx..'Abs:TagAdmins:Time'..msg.chat_id_..':'..msg.sender_user_id_,300,true)
 tdcli_function ({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersAdministrators"},offset_ = 0,limit_ = 100 },function(extra,result,success)
 x = 0
 tags = 0
